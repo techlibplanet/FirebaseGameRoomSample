@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "119751854698",
+    "firebase_url": "https://fir-gameroomsample.firebaseio.com",
+    "project_id": "fir-gameroomsample",
+    "storage_bucket": "fir-gameroomsample.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:119751854698:android:64f4a257129ffabd7a5813",
+        "android_client_info": {
+          "package_name": "com.example.firebasegameroomsample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "119751854698-ouofkgs7d4lqi9pon8f67m4br0qrjdm4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.firebasegameroomsample",
+            "certificate_hash": "2f9f0e9aa8875e8917db56778e8e4265ac6f0436"
+          }
+        },
+        {
+          "client_id": "119751854698-etj3hnvbrivpnbgv751fnq57190bejs6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHzYCZplkDzaezXIIoXb-Iz0nASrHDWvQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "119751854698-etj3hnvbrivpnbgv751fnq57190bejs6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
