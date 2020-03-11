@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private val clickables = intArrayOf(R.id.add_user, R.id.create_room, R.id.join_room)
 
     private val TAG = MainActivity::class.java.simpleName
+    private var rooms: Rooms? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,13 +39,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 for (child in dataSnapshot.children) {
                     when (child.key) {
                         "users" -> {
-                            val user =
-                                dataSnapshot.child("users").child("123").getValue(Users::class.java)
+                            val user = dataSnapshot.child("users").child("123").getValue(Users::class.java)
                             user?.email
                         }
                         "rooms" -> {
-                            val room = dataSnapshot.child("rooms").getValue(Rooms::class.java)
-                            room?.romId
+                            rooms = dataSnapshot.child("rooms").getValue(Rooms::class.java)
+                            rooms?.romId
                         }
                     }
                 }
@@ -77,6 +77,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 //                room.maxPlayers = "10"
 //                room.minPayers = "2"
                 val room = Rooms()
+                room.joinedPlayers = "1"
+                room.maxPlayers = "10"
+                room.minPayers = "2"
+                room.romId = "123"
                 val players = mutableListOf(user1)
                 room.players = JsonHelper.KtToJson(players)
                 database.child("rooms").setValue(room)
@@ -87,7 +91,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 user2.email = "priyank@gmail.coom"
                 user2.userName = "Priyank"
                 user2.uid = "456"
-                database.child("rooms")
+                val roomPlayersList = JsonHelper.jsonToKtMutableList<MutableList<Users>>(rooms?.players!!)
+                var list = mutableListOf<Users>()
+                for (playerList in roomPlayersList) {
+                    list = playerList
+                }
+                list.add(user2)
+                database.child("rooms").child("players").setValue(JsonHelper.KtToJson(list))
             }
         }
     }
