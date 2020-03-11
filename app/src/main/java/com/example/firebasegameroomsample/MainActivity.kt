@@ -9,6 +9,7 @@ import com.example.firebasegameroomsample.helper.JsonHelper
 import com.example.firebasegameroomsample.models.Rooms
 import com.example.firebasegameroomsample.models.Users
 import com.google.firebase.database.*
+import com.google.gson.reflect.TypeToken
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -39,12 +40,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 for (child in dataSnapshot.children) {
                     when (child.key) {
                         "users" -> {
-                            val user = dataSnapshot.child("users").child("123").getValue(Users::class.java)
+                            val user =
+                                dataSnapshot.child("users").child("123").getValue(Users::class.java)
                             user?.email
                         }
                         "rooms" -> {
                             rooms = dataSnapshot.child("rooms").getValue(Rooms::class.java)
-                            rooms?.romId
+                            val map = child.value as Map<String, Any>
+                            val players = map["players"].toString()
+                            val type = object : TypeToken<List<Users>>() {}.type
+                            val result: List<Users> = JsonHelper.parseArray<List<Users>>(json = players, typeToken = type)
+                            println(result)
+
                         }
                     }
                 }
@@ -68,10 +75,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 user1.userName = "Mayank"
                 user1.uid = "123"
 
-//                val user3 = Users()
-//                user3.email = "mayank@gmail.coom"
-//                user3.userName = "Mayank"
-//                user3.uid = "123"
+                val user3 = Users()
+                user3.email = "mayank@gmail.coom"
+                user3.userName = "Mayank"
+                user3.uid = "123"
 //
 //                room.romId = "room1"
 //                room.maxPlayers = "10"
@@ -81,23 +88,23 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 room.maxPlayers = "10"
                 room.minPayers = "2"
                 room.romId = "123"
-                val players = mutableListOf(user1)
+                val players = mutableListOf(user1, user3)
                 room.players = JsonHelper.KtToJson(players)
                 database.child("rooms").setValue(room)
             }
 
-            R.id.join_room ->{
+            R.id.join_room -> {
                 val user2 = Users()
                 user2.email = "priyank@gmail.coom"
                 user2.userName = "Priyank"
                 user2.uid = "456"
-                val roomPlayersList = JsonHelper.jsonToKtMutableList<MutableList<Users>>(rooms?.players!!)
-                var list = mutableListOf<Users>()
-                for (playerList in roomPlayersList) {
-                    list = playerList
-                }
-                list.add(user2)
-                database.child("rooms").child("players").setValue(JsonHelper.KtToJson(list))
+
+              //  val playerList = JsonHelper.jsonToKtList<List<Any>>(rooms?.players!!)
+
+
+
+//                list.add(user2)
+//                database.child("rooms").child("players").setValue(JsonHelper.KtToJson(list))
             }
         }
     }
