@@ -11,7 +11,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add User!"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,5 +34,25 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/create_room" />
+
+    <Button
+        android:layout_marginTop="16dp"
+        android:id="@+id/leave_room"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Leave Room!"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/join_room" />
+
+    <Button
+        android:layout_marginTop="16dp"
+        android:id="@+id/invitation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Invitation !"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/join_room" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
